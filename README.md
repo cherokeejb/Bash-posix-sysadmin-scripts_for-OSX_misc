@@ -1,5 +1,5 @@
 # bash-sysadmin-misc
-Here are sanitized, fairly simple bash scripts I wrote and used in production at a former employer, on OSX.  This may include future, unrelated scripts as well of course.
+Here are sanitized, fairly simple bash scripts I wrote and used in production at a former employer, on OSX.  This may include future, unrelated scripts as well of course.  They were usually hidden in the home directory of an admin account like /Users/[username]/.scriptname
 
 #CUT TO The CHASE::
 These scripts along with other innovations saved my employer hundreds of thousands of Euros in costs which would have otherwise been needed by an expensive "easy management" software like Casper/Jamf, and helped keep the network quickly secure and organized/inventoried, with the naming script esepcially, to quickly add in new systems.
