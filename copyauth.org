@@ -1,0 +1,49 @@
+#! /bin/sh -e
+
+# (c) public domain
+
+# This just needs to copy the master Ableton and Plugin Alliance authorizations, after authorization
+#	into the library and system library for new users
+
+# These programs use machine-based authorizations, sometimes PA works from simply copying the license in the local Library
+# 	We do most else in the new User templates & device mdm, and a few things like Desktop images and mount points in user mdm profiles
+#	# Templates include fixes like passing an Ableton preferences and database (with userlibrary removed), and Options.txt
+#		#and preventing roam on the network for files in the User hierchy for Ableton (not currently needed)
+#
+
+#variables to make script portable for github
+#admin user
+auser='$auser1'
+#if desired another, pre-existing local user
+nonauser='$nonauser1'
+
+#variables for a slight speed improvement
+au=/Users/"$auser1"/Library/Application\ Support/Ableton/Live\ 9.6.1/Unlock/
+pau=/Users/"$auser1"/Library/Application\ Support/Plugin\ Alliance/
+
+stu=/Users/"$nonauser1"/Library/Application\ Support/
+tpl=/System/Library/User\ Template/English.lproj/Library/Application\ Support/
+sysl=/Library/Application\ Support/
+
+
+#the directories we need to copy to exist already due to the imaging process
+
+#	#putting this stuff in the dirs for our default backup local user(s), iprob need to be root on all 4 of these since are not gui admins files
+sudo cp -Rf "$pau" "$stu"Plugin\ Alliance/
+sudo cp -Rf "$au" "$stu"Ableton/Live\ 9.6.1/Unlock/
+
+
+	#...and just for safe-keeping, the local library as well
+sudo cp -Rf "$pau" "$sysl"Plugin\ Alliance/
+sudo cp -Rf "$au" "$sysl"Ableton/Live\ 9.6.1/Unlock/
+
+        #... and putting this stuff in the template
+sudo cp -Rf "$pau" "$tpl"Plugin\ Alliance/
+sudo cp -Rf "$au" "$tpl"Ableton/Live\ 9.6.1/Unlock/
+
+#fixing these permissions for double-sure since copied by root
+sudo chown -R "$nonauser1" "$stu"Plugin\ Alliance/
+sudo chown -R "$nonauser1" "$stu"Ableton/Live\ 9.6.1/Unlock/
+
+#make sure i am no longer root #it might be good to avoid double exit commandsi (as this was int he implimented version), in future for there type of scripts to make sure coudl later add things on with like echo >>
+exit
